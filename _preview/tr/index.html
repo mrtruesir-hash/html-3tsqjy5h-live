@@ -234,7 +234,7 @@ window.__LANGMAP={"English":"en","Русский":"ru","বাংলা":"bn","�
   renderDots();updateCarousel();
   document.addEventListener('DOMContentLoaded',function(){renderDots();updateCarousel();})
   </script>
-  </body>
+  <script>(function(){var LANGS=['ru','bn','ar','uz','tr','fr','si','so','sw','fa','az','ur','hi','ne','es','pt'];function parse(){var raw=location.pathname;var parts=raw.split(String.fromCharCode(47)).filter(Boolean);var lang=String.fromCharCode(101,110);var slug="";if(parts[0]&&LANGS.indexOf(parts[0])!==-1){lang=parts.shift();}slug=parts.join(String.fromCharCode(47));return{lang:lang,slug:slug};}function pageIdFor(s){return s?("page-"+s):"page-affiliate-hub";}function applyAll(){var p=parse();try{if(window.__applyLang){window.__applyLang(p.lang);}}catch(e){}try{var pid=pageIdFor(p.slug);if(window.showPage&&document.getElementById(pid)){window.__navOnLoad=true;window.showPage(p.slug?p.slug:"affiliate-hub");window.__navOnLoad=false;}}catch(e){}}function wrap(){if(window.showPage&&!window.__showPageWrapped){var orig=window.showPage;window.showPage=function(id){orig.apply(this,arguments);if(window.__navOnLoad)return;try{var p=parse();var slug=(id==="affiliate-hub")?"":id;var pre=(p.lang===String.fromCharCode(101,110))?"":(String.fromCharCode(47)+p.lang);var sep=String.fromCharCode(47);var url=slug?(pre+sep+slug):(pre+sep);history.pushState({},"",url);}catch(e){}};window.__showPageWrapped=true;}}function init(){wrap();applyAll();}if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",init);}else{init();}window.addEventListener("popstate",function(){applyAll();});})();</script></body>
   </html>
   <!-- rtlfix2 -->
   <!-- seo-update -->
