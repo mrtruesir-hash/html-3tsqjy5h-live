@@ -1,0 +1,3 @@
+const fs=require("fs"),path=require("path");
+const FOOT="<p style=\"margin-top:48px;font-size:14px;color:#888\">This is an independent DBBET affiliate resource. 18+ only. Please gamble responsibly.</p><p style=\"font-size:14px\"><a href=\"/about/\">About</a> &middot; <a href=\"/terms/\">Terms</a> &middot; <a href=\"/privacy/\">Privacy</a> &middot; <a href=\"/cookies/\">Cookies</a> &middot; <a href=\"/affiliate-disclosure/\">Affiliate Disclosure</a> &middot; <a href=\"/contact/\">Contact</a></p>";
+module.exports={FOOT};
