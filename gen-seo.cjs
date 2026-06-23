@@ -4,7 +4,7 @@ const OUT='_preview';
 const LANGS=['ru','es','pt','fr','tr','ar','uz','az','sw','so','fa','ur','hi','bn','ne','si'];
 const LOCALES=['en'].concat(LANGS);
 const SLUGS=['','partner-benefits','instruction','mob-cash'];
-function urlFor(loc,slug){var p=base+'/';if(loc!=='en')p+=loc+'/';if(slug)p+=slug;return p;}
+function urlFor(loc,slug){var p=base+'/';if(loc!=='en')p+=loc+'/';if(slug)p+=slug+'/';return p;}
 function exists(loc,slug){var d=OUT+(loc==='en'?'':'/'+loc)+(slug?'/'+slug:'');return fs.existsSync(d+'/index.html');}
 const today=new Date().toISOString().slice(0,10);
 const NL='\n';
@@ -27,6 +27,17 @@ SLUGS.forEach(function(slug){
     x+='  </url>'+NL;
   });
 });
+/* BLOG-SITEMAP-PATCH */
+if(fs.existsSync('blog/index.html')){
+  x+='  <url>'+NL+'    <loc>'+base+'/blog/</loc>'+NL+'    <lastmod>'+today+'</lastmod>'+NL+'    <changefreq>weekly</changefreq>'+NL+'    <priority>0.8</priority>'+NL+'  </url>'+NL;
+}
+if(fs.existsSync('blog')){
+  fs.readdirSync('blog').forEach(function(slug){
+    if(fs.existsSync('blog/'+slug+'/index.html')){
+      x+='  <url>'+NL+'    <loc>'+base+'/blog/'+slug+'/</loc>'+NL+'    <lastmod>'+today+'</lastmod>'+NL+'    <changefreq>weekly</changefreq>'+NL+'    <priority>0.7</priority>'+NL+'  </url>'+NL;
+    }
+  });
+}
 x+='</urlset>'+NL;
 fs.writeFileSync(OUT+'/sitemap.xml',x);
 var robots='User-agent: *'+NL+'Allow: /'+NL+NL+'Sitemap: '+base+'/sitemap.xml'+NL;
