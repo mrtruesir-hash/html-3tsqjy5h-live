@@ -1,0 +1,5 @@
+Add JSON-LD schema to pillar pages and static articles
+
+- pillarPage(): inject CollectionPage + BreadcrumbList JSON-LD (5 category pages)
+- 3 static articles: inject BlogPosting + BreadcrumbList
+- regenerate sitemap
