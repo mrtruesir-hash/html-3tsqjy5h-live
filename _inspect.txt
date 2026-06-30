@@ -1,0 +1,13 @@
+v>
+  <div class="section-head"><span class="eyebrow">THE PEOPLE BEHIND DBBET</span><h2>Our Team</h2><p class="lead">A dedicated team of iGaming, marketing and support professionals committed to your success.</p></div>
+  <div class="grid-4 team">
+  <div class="team-card"><div class="avatar">AM</div><h4>Affiliate Managers</h4><p>Personal guidance to optimize your campaigns and earnings.</p></div>
+  <div class="team-card"><div class="avatar">MK</div><h4>Marketing Experts</h4><p>Fresh, high-converting creatives and promo materials every month.</p></div>
+  <div class="team-card"><div class="avatar">24</div><h4>Support Team</h4><p>Round-the-clock assistance whenever you need it.</p></div>
+  <div class="team-card"><div class="avatar">$</div><h4>Payments Team</h4><p>Fast, secure and on-time partner settlements.</p></div>
+  </div>
+  </div>
+  </section>
+  <section class="page" id="page-partner-benefits">
+    <div class="page-hero">
+    <div class="containe
