@@ -54,7 +54,7 @@ const LANG_CURRENT = {
 const I18N = {
   en: {
     nav:{affiliateHub:'AFFILIATE HUB',partnerBenefits:'PARTNER BENEFITS',instruction:'INSTRUCTION',mobCash:'MOB-CASH AGENT',terms:'TERMS',blog:'BLOG'},
-    home:'Home', blog:'Blog', related:'Related guides',
+    home:'Home', blog:'Blog', related:'Related guides', sources:'Sources & references',
     footTagline:'The iGaming affiliate program for serious media buyers — up to 55% RevShare, $110 CPA and hybrid deals.',
     footAffiliates:'Affiliates', footCompany:'Company',
     fPartnerBenefits:'Partner Benefits', fInstruction:'Instruction', fMobCash:'Mob-Cash Agent', fBlog:'Blog', fApp:'App', fAbout:'About', fContact:'Contact',
@@ -65,7 +65,7 @@ const I18N = {
   },
   ru: {
     nav:{affiliateHub:'ПАРТНЁРКА',partnerBenefits:'ПРЕИМУЩЕСТВА',instruction:'ИНСТРУКЦИЯ',mobCash:'MOB-CASH АГЕНТ',terms:'УСЛОВИЯ',blog:'БЛОГ'},
-    home:'Главная', blog:'Блог', related:'Похожие материалы',
+    home:'Главная', blog:'Блог', related:'Похожие материалы', sources:'Источники и ссылки',
     footTagline:'Партнёрская программа iGaming для серьёзных медиабайеров — до 55% RevShare, до 110 $ CPA и Hybrid-сделки.',
     footAffiliates:'Партнёрам', footCompany:'Компания',
     fPartnerBenefits:'Преимущества', fInstruction:'Инструкция', fMobCash:'MOB-CASH агент', fBlog:'Блог', fApp:'Приложение', fAbout:'О нас', fContact:'Контакты',
@@ -178,6 +178,13 @@ function relatedBlock(page){
   return `<aside class="related"><h2>${T(page.lang).related}</h2><ul>${items}</ul></aside>`;
 }
 
+// outbound citations to named regulators / payment rails (E-E-A-T + AI trust)
+function sourcesBlock(page){
+  if (!page.sources || !page.sources.length) return '';
+  const items = page.sources.map(x=>`<li><a href="${attr(x.url)}" rel="noopener nofollow" target="_blank">${esc(x.name)}</a></li>`).join('');
+  return `<aside class="sources"><h2>${T(page.lang).sources}</h2><ul>${items}</ul></aside>`;
+}
+
 function ctaBlock(lang){
   const s = T(lang);
   return `<div class="post-cta"><h2>${s.ctaH}</h2>`
@@ -231,6 +238,7 @@ function renderPage(page){
     + bodyHtml
     + ctaBlock(page.lang)
     + relatedBlock(page)
+    + sourcesBlock(page)
     + `</article></main>`
     + footer(page.lang) + mobileBar(page.lang) + `</body></html>`;
 
