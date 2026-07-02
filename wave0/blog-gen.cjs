@@ -36,46 +36,84 @@ const LANG_MENU = [
 ];
 
 const NAV = [
-  { t:'AFFILIATE HUB',    href:'/' },
-  { t:'PARTNER BENEFITS', href:'/partner-benefits/' },
-  { t:'INSTRUCTION',      href:'/instruction/' },
-  { t:'MOB-CASH AGENT',   href:'/mob-cash/' },
-  { t:'TERMS',            href:'/terms/' },
-  { t:'BLOG',             href:'/blog/' },
+  { key:'affiliateHub',    href:'/' },
+  { key:'partnerBenefits', href:'/partner-benefits/' },
+  { key:'instruction',     href:'/instruction/' },
+  { key:'mobCash',         href:'/mob-cash/' },
+  { key:'terms',           href:'/terms/' },
+  { key:'blog',            href:'/blog/' },
 ];
 
-function header(){
+// current-language button label per lang (menu below always lists all 5)
+const LANG_CURRENT = {
+  en:{flag:'🇬🇧',name:'English'}, ru:{flag:'🇷🇺',name:'Русский'},
+  ar:{flag:'🇪🇬',name:'العربية'}, fr:{flag:'🇫🇷',name:'Français'}, pt:{flag:'🇧🇷',name:'Português'},
+};
+
+// i18n string packs for the site shell (chrome). Non-EN falls back to EN per key.
+const I18N = {
+  en: {
+    nav:{affiliateHub:'AFFILIATE HUB',partnerBenefits:'PARTNER BENEFITS',instruction:'INSTRUCTION',mobCash:'MOB-CASH AGENT',terms:'TERMS',blog:'BLOG'},
+    home:'Home', blog:'Blog', related:'Related guides',
+    footTagline:'The iGaming affiliate program for serious media buyers — up to 55% RevShare, $110 CPA and hybrid deals.',
+    footAffiliates:'Affiliates', footCompany:'Company',
+    fPartnerBenefits:'Partner Benefits', fInstruction:'Instruction', fMobCash:'Mob-Cash Agent', fBlog:'Blog', fApp:'App', fAbout:'About', fContact:'Contact',
+    lTerms:'Terms', lPrivacy:'Privacy', lCookies:'Cookies', lDisclosure:'Affiliate Disclosure',
+    ctaH:'Start earning with DBBET Partners',
+    ctaP:'Up to 55% RevShare, $110 CPA and hybrid deals, with payouts in your market\'s local rails.',
+    joinBtn:'Become a Partner',
+  },
+  ru: {
+    nav:{affiliateHub:'ПАРТНЁРКА',partnerBenefits:'ПРЕИМУЩЕСТВА',instruction:'ИНСТРУКЦИЯ',mobCash:'MOB-CASH АГЕНТ',terms:'УСЛОВИЯ',blog:'БЛОГ'},
+    home:'Главная', blog:'Блог', related:'Похожие материалы',
+    footTagline:'Партнёрская программа iGaming для серьёзных медиабайеров — до 55% RevShare, до 110 $ CPA и Hybrid-сделки.',
+    footAffiliates:'Партнёрам', footCompany:'Компания',
+    fPartnerBenefits:'Преимущества', fInstruction:'Инструкция', fMobCash:'MOB-CASH агент', fBlog:'Блог', fApp:'Приложение', fAbout:'О нас', fContact:'Контакты',
+    lTerms:'Условия', lPrivacy:'Конфиденциальность', lCookies:'Cookies', lDisclosure:'Раскрытие',
+    ctaH:'Начните зарабатывать с DBBET Partners',
+    ctaP:'До 55% RevShare, до 110 $ CPA и Hybrid-сделки, с выплатами через локальные способы вашего рынка.',
+    joinBtn:'Стать партнёром',
+  },
+};
+const baseLang = l => (l||'en').split('-')[0];
+const T = l => I18N[baseLang(l)] || I18N.en;
+const langCur = l => LANG_CURRENT[baseLang(l)] || LANG_CURRENT.en;
+
+function header(lang){
+  const s = T(lang), lc = langCur(lang);
   return `<header class="site-header" id="siteHeader"><div class="header-inner">`
     + `<a class="logo" href="/"><span class="logo-db"><img class="logo-mark" src="/favicon.svg" alt="DB"></span><span class="logo-bet">BET</span><span class="logo-sub">PARTNERS</span></a>`
     + `<nav class="main-nav" id="mainNav">`
-    + NAV.map(n=>`<a class="nav-link" href="${n.href}">${n.t}</a>`).join('')
+    + NAV.map(n=>`<a class="nav-link" href="${n.href}">${s.nav[n.key]}</a>`).join('')
     + `</nav><div class="header-right"><div class="lang-selector" id="langSelector">`
-    + `<button class="lang-current"><span class="flag">🇬🇧</span><span class="lang-name">English</span><span class="caret">▾</span></button>`
+    + `<button class="lang-current"><span class="flag">${lc.flag}</span><span class="lang-name">${lc.name}</span><span class="caret">▾</span></button>`
     + `<ul class="lang-menu" id="langMenu">`
     + LANG_MENU.map(l=>`<li><a href="${l.href}"><span class="flag">${l.flag}</span> ${l.name}</a></li>`).join('')
     + `</ul></div></div></div></header>`;
 }
 
-function footer(){
+function footer(lang){
+  const s = T(lang);
   return `<footer class="site-footer"><div class="container footer-inner">`
     + `<div class="footer-brand"><span class="logo-db"><img class="logo-mark" src="/favicon.svg" alt="DB"></span><span class="logo-bet">BET PARTNERS</span>`
-    + `<p>The iGaming affiliate program for serious media buyers — up to 55% RevShare, $110 CPA and hybrid deals.</p></div>`
+    + `<p>${s.footTagline}</p></div>`
     + `<div class="footer-cols">`
-    + `<div><h5>Affiliates</h5>`
-    + `<a href="/partner-benefits/">Partner Benefits</a><a href="/instruction/">Instruction</a><a href="/mob-cash/">Mob-Cash Agent</a><a href="/blog/">Blog</a><a href="/app/">App</a></div>`
-    + `<div><h5>Company</h5><a href="/about/">About</a><a href="/contact/">Contact</a></div>`
+    + `<div><h5>${s.footAffiliates}</h5>`
+    + `<a href="/partner-benefits/">${s.fPartnerBenefits}</a><a href="/instruction/">${s.fInstruction}</a><a href="/mob-cash/">${s.fMobCash}</a><a href="/blog/">${s.fBlog}</a><a href="/app/">${s.fApp}</a></div>`
+    + `<div><h5>${s.footCompany}</h5><a href="/about/">${s.fAbout}</a><a href="/contact/">${s.fContact}</a></div>`
     + `</div></div>`
     + `<div class="footer-bottom"><div class="container"><div class="footer-legal-links">`
-    + `<a href="/terms/">Terms</a><a href="/privacy/">Privacy</a><a href="/cookies/">Cookies</a><a href="/affiliate-disclosure/">Affiliate Disclosure</a><a href="/about/">About</a><a href="/contact/">Contact</a>`
+    + `<a href="/terms/">${s.lTerms}</a><a href="/privacy/">${s.lPrivacy}</a><a href="/cookies/">${s.lCookies}</a><a href="/affiliate-disclosure/">${s.lDisclosure}</a><a href="/about/">${s.fAbout}</a><a href="/contact/">${s.fContact}</a>`
     + `</div></div></div></footer>`;
 }
 
-function mobileBar(){
-  return `<div class="mobile-join-bar"><a class="btn btn-join mobile-join-btn" href="${MONEY}">Become a Partner</a></div>`;
+function mobileBar(lang){
+  return `<div class="mobile-join-bar"><a class="btn btn-join mobile-join-btn" href="${MONEY}">${T(lang).joinBtn}</a></div>`;
 }
 
 function breadcrumb(page){
-  const crumbs = [['Home','/'],['Blog','/blog/']];
+  const s = T(page.lang);
+  const crumbs = [[s.home,'/'],[s.blog,'/blog/']];
   if (page.type === 'article' && page.pillarSlug) crumbs.push([page.pillarTitle, rel(page.pillarSlug)]);
   crumbs.push([page.h1, rel(page.slug)]);
   const html = `<nav class="breadcrumb" aria-label="Breadcrumb"><ol>`
@@ -137,13 +175,14 @@ function renderBody(page){
 function relatedBlock(page){
   if (!page.related || !page.related.length) return '';
   const items = page.related.map(r=>`<li><a href="${rel(r.slug)}">${esc(r.title)}</a></li>`).join('');
-  return `<aside class="related"><h2>Related guides</h2><ul>${items}</ul></aside>`;
+  return `<aside class="related"><h2>${T(page.lang).related}</h2><ul>${items}</ul></aside>`;
 }
 
-function ctaBlock(){
-  return `<div class="post-cta"><h2>Start earning with DBBET Partners</h2>`
-    + `<p>Up to 55% RevShare, $110 CPA and hybrid deals, with payouts in your market's local rails.</p>`
-    + `<a class="btn btn-join" href="${MONEY}">Become a Partner</a></div>`;
+function ctaBlock(lang){
+  const s = T(lang);
+  return `<div class="post-cta"><h2>${s.ctaH}</h2>`
+    + `<p>${s.ctaP}</p>`
+    + `<a class="btn btn-join" href="${MONEY}">${s.joinBtn}</a></div>`;
 }
 
 // ---- quality gates (throw -> build fails -> a stub cannot ship) -------------
@@ -184,16 +223,16 @@ function renderPage(page){
   const upLink = (page.type==='article' && page.pillarSlug)
     ? `<p class="up-to-pillar"><a href="${rel(page.pillarSlug)}">← ${esc(page.pillarTitle)}</a></p>` : '';
 
-  const body = `<body>` + header()
+  const body = `<body>` + header(page.lang)
     + `<main class="page-wrap blog-page"><article class="blog-post">`
     + bc.html
     + `<h1>${esc(page.h1)}</h1>`
     + upLink
     + bodyHtml
-    + ctaBlock()
+    + ctaBlock(page.lang)
     + relatedBlock(page)
     + `</article></main>`
-    + footer() + mobileBar() + `</body></html>`;
+    + footer(page.lang) + mobileBar(page.lang) + `</body></html>`;
 
   return head + body;
 }
@@ -286,7 +325,7 @@ function writeBlogIndex(pubPages){
     + `<link rel="canonical" href="${ORIGIN}/blog/">`
     + `<meta name="robots" content="index,follow">`
     + `<link rel="icon" href="/favicon.svg"><link rel="stylesheet" href="/styles.css"></head>`;
-  const body = `<body>${header()}<main class="page-wrap blog-index">`
+  const body = `<body>${header('en')}<main class="page-wrap blog-index">`
     + `<h1>DBBET Partners Blog</h1>`
     + `<p style="font-size:18px;color:#ccc;max-width:740px">Practical guides, honest comparisons and country-by-country playbooks for iGaming affiliates and media buyers. Whether you are just starting out or scaling across markets, these resources help you choose the right program, pick the right payment rails and earn more.</p>`
     + `<h2 style="margin-top:48px">Featured guides</h2>`
@@ -298,7 +337,7 @@ function writeBlogIndex(pubPages){
     +   `<p style="margin:0 0 18px;color:#ffe;font-size:16px">Join DBBET Partners and earn up to 55% RevShare with fast, secure payouts.</p>`
     +   `<a href="${MONEY}" style="display:inline-block;background:#fff;color:#b3164a;font-weight:700;padding:12px 26px;border-radius:30px;text-decoration:none">Explore our affiliate program</a>`
     + `</div>`
-    + `</main>${footer()}${mobileBar()}</body></html>`;
+    + `</main>${footer('en')}${mobileBar('en')}</body></html>`;
   fs.mkdirSync('blog', { recursive:true });
   fs.writeFileSync(path.join('blog','index.html'), head+body);
 }
