@@ -225,26 +225,67 @@ function build(){
     written++;
   }
 
-  // /blog/ index — lists published pillars (crawlable hub)
-  writeBlogIndex(pages.filter(p=>p.type==='pillar' && published(p.market)));
+  // /blog/ index — hero + featured + browse-by-topic (crawlable hub)
+  writeBlogIndex(pages.filter(p=>published(p.market)));
 
   console.log(`[blog-gen] OK wave<=${CFG.CURRENT_WAVE}: wrote ${written} pages, ${skippedWave} held for later waves.`);
   return { written, skippedWave };
 }
 
-function writeBlogIndex(pillars){
-  const cards = pillars.map(p=>`<li><a href="${rel(p.slug)}"><h3>${esc(p.h1)}</h3><p>${esc(p.metaDesc)}</p></a></li>`).join('');
+// Display label per market for the index "Browse by topic" categories.
+const MARKET_LABEL = {
+  'global': 'Affiliate Guides', 'bangladesh': 'Bangladesh', 'tanzania': 'Tanzania',
+  'sri-lanka': 'Sri Lanka', 'somalia': 'Somalia', 'russia-cis': 'Russia & CIS',
+  'uzbekistan': 'Uzbekistan', 'azerbaijan': 'Azerbaijan', 'brazil': 'Brazil',
+  'francophone-africa': 'Francophone Africa', 'egypt': 'Egypt',
+};
+
+function featuredCard(page, label){
+  return `<a href="${rel(page.slug)}" style="display:block;padding:22px;background:#16161c;border:1px solid #262630;border-radius:14px;text-decoration:none;color:inherit">`
+    + `<span style="color:#ff3b6b;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.05em">${esc(label)}</span>`
+    + `<h3 style="margin:8px 0 10px">${esc(page.h1)}</h3>`
+    + `<p style="margin:0;color:#9aa0aa;font-size:15px">${esc(page.metaDesc)}</p></a>`;
+}
+
+function writeBlogIndex(pubPages){
+  const bySlug = Object.fromEntries(pubPages.map(p=>[p.slug, p]));
+
+  // Featured guides — flagship guide, comparison, and a geo hub (English titles).
+  const feat = [
+    [bySlug['igaming-affiliate-programs'], 'Guide'],
+    [bySlug['revshare-vs-cpa-vs-hybrid'], 'Comparison'],
+    [bySlug['bangladesh-affiliate-programs'], 'GEO Guide'],
+  ].filter(f => f[0]);
+  const featured = feat.map(([p, l]) => featuredCard(p, l)).join('');
+
+  // Browse by topic — one category per market, pillar first then its spokes.
+  const topics = CFG.MARKETS.map(m => {
+    const items = pubPages.filter(p => p.market === m.id);
+    if (!items.length) return '';
+    const pillar = items.find(p => p.type === 'pillar');
+    const spokes = items.filter(p => p.type === 'article');
+    const li = [];
+    if (pillar) li.push(`<li><a href="${rel(pillar.slug)}" style="color:#fff;font-weight:600;text-decoration:none">${esc(pillar.h1)}</a></li>`);
+    for (const s of spokes) li.push(`<li><a href="${rel(s.slug)}" style="color:#cfd2d8;text-decoration:none">${esc(s.h1)}</a></li>`);
+    return `<div style="margin-bottom:30px"><h3 style="color:#ff3b6b;margin:0 0 12px;font-size:19px">${esc(MARKET_LABEL[m.id] || m.id)}</h3>`
+      + `<ul style="list-style:none;padding:0;margin:0;display:grid;gap:9px">${li.join('')}</ul></div>`;
+  }).join('');
+
   const head = `<!doctype html><html lang="en"><head><meta charset="utf-8">`
     + `<meta name="viewport" content="width=device-width, initial-scale=1">`
-    + `<title>Blog — iGaming Affiliate Guides by Country | DBBET Partners</title>`
-    + `<meta name="description" content="In-depth iGaming affiliate-recruitment guides by country: payouts, local payment rails, top brands and traffic sources.">`
+    + `<title>DBBET Partners Blog | iGaming Affiliate Guides 2026</title>`
+    + `<meta name="description" content="Practical guides, honest comparisons and country-by-country playbooks for iGaming affiliates — how to join, compare commissions, choose local payment rails and grow with DBBET Partners.">`
     + `<link rel="canonical" href="${ORIGIN}/blog/">`
     + `<meta name="robots" content="index,follow">`
     + `<link rel="icon" href="/favicon.svg"><link rel="stylesheet" href="/styles.css"></head>`;
   const body = `<body>${header()}<main class="page-wrap blog-index">`
-    + `<h1>iGaming Affiliate Guides by Country</h1>`
-    + `<p class="blog-index-intro">Country-by-country guides for affiliates and media buyers — how to earn promoting betting and casino traffic with DBBET Partners.</p>`
-    + `<ul class="blog-hub-list">${cards}</ul></main>${footer()}${mobileBar()}</body></html>`;
+    + `<h1>DBBET Partners Blog</h1>`
+    + `<p style="font-size:18px;color:#ccc;max-width:740px">Practical guides, honest comparisons and country-by-country playbooks for iGaming affiliates and media buyers. Whether you are just starting out or scaling across markets, these resources help you choose the right program, pick the right payment rails and earn more.</p>`
+    + `<h2 style="margin-top:48px">Featured guides</h2>`
+    + `<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px">${featured}</div>`
+    + `<h2 style="margin-top:56px">Browse by topic</h2>`
+    + `<div>${topics}</div>`
+    + `</main>${footer()}${mobileBar()}</body></html>`;
   fs.mkdirSync('blog', { recursive:true });
   fs.writeFileSync(path.join('blog','index.html'), head+body);
 }
