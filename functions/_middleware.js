@@ -4,9 +4,10 @@
  * Runs BEFORE the static asset / SPA fallback, in order:
  *   1. trailing-slash canonicalisation (without-slash -> 301 with-slash)
  *   2. 301 redirects for retired OLD-version URLs -> nearest live page (redirect-map.json)
- *   3. 301 dropped-language trees -> their English equivalent (prefix strip: /ne/mob-cash/ -> /mob-cash/)
- *        GSC (sc-domain:dbbetaff.com) shows these old-version pages still carry the site's
- *        (residual) traffic, so we REDIRECT (capture equity) rather than 410 (discard) — R1/F14.
+ *   3. (REMOVED 2026-07-02) dropped-language prefix-strip. The LIVE site actively serves and
+ *        client-side-routes to /{lang}/ folders (homepage reads localStorage lang + redirects
+ *        there), so 301'ing them caused an infinite /so/ -> / -> /so/ loop. Language consolidation,
+ *        if wanted, must be done in the app/build, NOT via edge redirects that fight the app.
  *   4. 410 Gone for exact dead URLs with no equivalent (gone-urls.json) — usually empty.
  *   5. 404 for any /blog/<slug>/ that is NOT a real page (valid-blog-slugs.json)
  *        -> fixes the soft-404 where gated/typo slugs (egypt-, brazil-, ...) return 200 + homepage.
@@ -22,7 +23,6 @@ import REDIRECTS from '../redirect-map.json';
 import GONE from '../gone-urls.json';
 import VALID_SLUGS from '../valid-blog-slugs.json';
 
-const DROPPED_LANGS = ['es', 'tr', 'uz', 'az', 'sw', 'so', 'fa', 'ur', 'hi', 'bn', 'ne', 'si'];
 const VALID = new Set(VALID_SLUGS);
 const goneList = (Array.isArray(GONE) ? GONE : []).filter((u) => typeof u === 'string' && u.startsWith('/'));
 
@@ -54,11 +54,8 @@ export async function onRequest(context) {
       return Response.redirect(url.origin + withSlash(target), 301);
     }
 
-    // 3. dropped-language tree -> 301 to English equivalent (strip the /{lang}/ prefix)
-    const dl = path.match(/^\/([a-z]{2})\/(.*)$/);
-    if (dl && DROPPED_LANGS.includes(dl[1])) {
-      return Response.redirect(url.origin + '/' + dl[2], 301);
-    }
+    // 3. (removed) dropped-language prefix-strip — it broke the live site's own /{lang}/ routing
+    //    (infinite /so/ -> / -> /so/ loop). Language folders now pass straight through.
 
     // 4. 410 Gone (exact dead URL with no equivalent) — normally empty
     if (goneList.includes(path)) {
