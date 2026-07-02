@@ -14,3 +14,22 @@
 - [Partner Benefits](https://dbbetaff.com/partner-benefits/): Commission plans (55% RevShare, $110 CPA, Hybrid) and partner perks.
 - [Privacy](https://dbbetaff.com/privacy/): Privacy policy.
 - [Terms](https://dbbetaff.com/terms/): Terms and conditions.
+
+## Blog — Concept & How-To Guides
+
+- [iGaming Affiliate Programs 2026: The Complete Guide](https://dbbetaff.com/blog/igaming-affiliate-programs/): How iGaming affiliate programs work — RevShare, CPA and hybrid deals, traffic sources and payouts.
+- [RevShare vs CPA vs Hybrid: Which Affiliate Deal Pays More?](https://dbbetaff.com/blog/revshare-vs-cpa-vs-hybrid/): Side-by-side comparison of the three commission models and when each wins.
+- [How to Become a Betting Affiliate (2026)](https://dbbetaff.com/blog/how-to-become-a-betting-affiliate/): Step-by-step guide from choosing a market to scaling earnings.
+- [Best Traffic Sources for iGaming Affiliates](https://dbbetaff.com/blog/best-traffic-sources-igaming-affiliates/): The highest-converting channels and how to pick one.
+
+## Blog — Country Guides
+
+- [Bangladesh iGaming Affiliate Programs](https://dbbetaff.com/blog/bangladesh-affiliate-programs/): Market guide — cricket demand, bKash/Nagad payments, how affiliates earn.
+- [Tanzania Affiliate Programs](https://dbbetaff.com/blog/tanzania-affiliate-programs/): Licensed market (Gaming Board of Tanzania), M-Pesa/Tigo/Airtel, football traffic.
+- [Sri Lanka iGaming Affiliate Programs](https://dbbetaff.com/blog/sri-lanka-affiliate-programs/): Cricket-driven, English-served market with local payment rails.
+- [Somalia iGaming Affiliate Programs](https://dbbetaff.com/blog/somalia-affiliate-programs/): Emerging market — EVC Plus mobile money, football, lean-market strategy.
+- [Партнёрские программы iGaming в СНГ (Russia/CIS)](https://dbbetaff.com/blog/cis-affiliate-programs/): Russian-language guide — Мир/СБП/крипто, Telegram traffic, DBBET terms.
+- [Партнёрские программы iGaming в Узбекистане (Uzbekistan)](https://dbbetaff.com/blog/uzbekistan-affiliate-programs/): Russian-language guide — Humo/Uzcard/Click/Payme, football traffic.
+- [Партнёрские программы iGaming в Азербайджане (Azerbaijan)](https://dbbetaff.com/blog/azerbaijan-affiliate-programs/): Russian-language guide — m10 and local cards, football traffic.
+
+Each country and concept guide links to deeper spokes (how-to, payments, brands, traffic sources) — crawl from the pillar pages above.

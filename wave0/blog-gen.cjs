@@ -112,11 +112,19 @@ function schemaFaq(faq){
 }
 
 // render the article body from sections [{h2, paras:[], h3blocks:[{h3,paras}]}]
+function renderTable(t){
+  const th = (t.head||[]).map(x=>`<th style="text-align:left;padding:10px 14px;border-bottom:2px solid #ff3b6b;color:#fff">${esc(x)}</th>`).join('');
+  const rows = (t.rows||[]).map(r=>`<tr>`+r.map((c,i)=>`<td style="padding:10px 14px;border-bottom:1px solid #262630;color:${i===0?'#fff':'#cfd2d8'}${i===0?';font-weight:600':''}">${esc(c)}</td>`).join('')+`</tr>`).join('');
+  return `<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;margin:10px 0 22px;font-size:15px">`
+    + `<thead><tr>${th}</tr></thead><tbody>${rows}</tbody></table></div>`;
+}
+
 function renderBody(page){
   let h = `<p class="post-intro">${page.intro}</p>`;
   for (const s of page.sections){
     h += `<h2>${esc(s.h2)}</h2>`;
     for (const p of (s.paras||[])) h += `<p>${p}</p>`;
+    if (s.table) h += renderTable(s.table);
     for (const b of (s.h3blocks||[])){
       h += `<h3>${esc(b.h3)}</h3>`;
       for (const p of (b.paras||[])) h += `<p>${p}</p>`;
