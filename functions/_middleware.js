@@ -27,10 +27,20 @@ const VALID = new Set(VALID_SLUGS);
 const goneList = (Array.isArray(GONE) ? GONE : []).filter((u) => typeof u === 'string' && u.startsWith('/'));
 
 const withSlash = (p) => (p.endsWith('/') ? p : p + '/');
+// a request for a real file (has an extension): /styles.css /favicon.svg /x.webp /sitemap.xml /llms.txt /robots.txt /app.js …
+const isFileRequest = (p) => /\.[a-zA-Z0-9]{1,8}$/.test(p);
 
 export async function onRequest(context) {
   try {
     const url = new URL(context.request.url);
+
+    // 0. NEVER rewrite static-asset requests — serve them exactly as asked.
+    //    Without this, rule 1 would 301 /styles.css -> /styles.css/ (a path that does not
+    //    exist), breaking CSS/JS/images/sitemap site-wide (every page renders unstyled).
+    if (isFileRequest(url.pathname)) {
+      return context.next();
+    }
+
     const path = withSlash(url.pathname);
 
     // 1. enforce trailing slash (canonical form)
