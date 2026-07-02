@@ -148,6 +148,21 @@ function schemaFaq(faq){
       acceptedAnswer:{'@type':'Answer', text:f.a}}))
   });
 }
+// entity anchor — identifies "DBBET Partners" as a stable Organization for AI retrieval
+function schemaOrg(){
+  return JSON.stringify({
+    '@context':'https://schema.org','@type':'Organization',
+    name:'DBBET Partners', url: ORIGIN, logo: ORIGIN + '/favicon.svg',
+    description:'iGaming affiliate program — up to 55% RevShare, up to $110 CPA and hybrid deals with weekly payments.'
+  });
+}
+// cluster signal — a pillar lists its spoke articles as an ItemList
+function schemaItemList(page){
+  return JSON.stringify({
+    '@context':'https://schema.org','@type':'ItemList',
+    itemListElement: (page.related||[]).map((r,i)=>({'@type':'ListItem', position:i+1, name:r.title, url: url(r.slug)}))
+  });
+}
 
 // render the article body from sections [{h2, paras:[], h3blocks:[{h3,paras}]}]
 function renderTable(t){
@@ -213,8 +228,9 @@ function assertQuality(page){
 function renderPage(page){
   const { bodyHtml } = assertQuality(page);
   const bc = breadcrumb(page);
-  const schemas = [schemaBlogPosting(page), schemaBreadcrumb(bc.crumbs)];
+  const schemas = [schemaBlogPosting(page), schemaBreadcrumb(bc.crumbs), schemaOrg()];
   if (page.faq && page.faq.length) schemas.push(schemaFaq(page.faq));
+  if (page.type === 'pillar' && page.related && page.related.length) schemas.push(schemaItemList(page));
 
   const head = `<!doctype html><html lang="${attr(page.lang)}"><head>`
     + `<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">`
