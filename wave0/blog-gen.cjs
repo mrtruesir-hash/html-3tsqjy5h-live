@@ -285,6 +285,11 @@ function writeBlogIndex(pubPages){
     + `<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px">${featured}</div>`
     + `<h2 style="margin-top:56px">Browse by topic</h2>`
     + `<div>${topics}</div>`
+    + `<div style="margin-top:56px;background:linear-gradient(135deg,#ff3b6b,#b3164a);border-radius:20px;padding:44px 32px;text-align:center">`
+    +   `<h2 style="margin:0 0 8px;color:#fff">Ready to start earning?</h2>`
+    +   `<p style="margin:0 0 18px;color:#ffe;font-size:16px">Join DBBET Partners and earn up to 55% RevShare with fast, secure payouts.</p>`
+    +   `<a href="${MONEY}" style="display:inline-block;background:#fff;color:#b3164a;font-weight:700;padding:12px 26px;border-radius:30px;text-decoration:none">Explore our affiliate program</a>`
+    + `</div>`
     + `</main>${footer()}${mobileBar()}</body></html>`;
   fs.mkdirSync('blog', { recursive:true });
   fs.writeFileSync(path.join('blog','index.html'), head+body);
