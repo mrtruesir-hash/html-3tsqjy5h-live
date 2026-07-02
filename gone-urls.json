@@ -1,0 +1,3 @@
+[
+  "__note__: Empty by design. GSC (sc-domain:dbbetaff.com, 3mo) shows every old-version URL is indexed with impressions, so per R1/F14 all are 301'd (redirect-map.json + the dropped-lang prefix rule) rather than 410'd. Add an exact path here ONLY for a genuinely dead URL with zero impressions AND no sensible redirect target."
+]
