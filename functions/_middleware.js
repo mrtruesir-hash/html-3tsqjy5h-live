@@ -29,9 +29,10 @@ import VALID_SLUGS from '../valid-blog-slugs.json';
 const VALID = new Set(VALID_SLUGS);
 const goneList = (Array.isArray(GONE) ? GONE : []).filter((u) => typeof u === 'string' && u.startsWith('/'));
 // Demolished language trees — removed TOTALLY with 410 (Gone), never 301 (zero equity/connection).
-const DROPPED_LANGS = new Set(['es', 'tr', 'uz', 'az', 'sw', 'so', 'fa', 'ur', 'hi', 'bn', 'ne', 'si']);
-// Kept languages (en = root, no prefix). Used to strip a lang prefix before the known-page check.
-const KEPT_LANGS = new Set(['ru', 'ar', 'fr', 'pt']);
+const DROPPED_LANGS = new Set(['es', 'tr', 'az', 'sw', 'so', 'fa', 'hi', 'ne']);
+// Kept/live languages (en = root, no prefix). Used to strip a lang prefix before the known-page check.
+// bn/uz/si/ur re-added + id net-new as properly-localized (SSG-baked) languages, launched noindex until reviewed.
+const KEPT_LANGS = new Set(['ru', 'ar', 'fr', 'pt', 'bn', 'uz', 'si', 'ur', 'id']);
 // The site's real top-level pages. ⚠️ Keep in sync with the repo's page dirs — a real page missing
 // here will be hard-404'd. ('blog' + blog slugs are handled separately, rule 5.)
 const PAGES = new Set(['about', 'affiliate-disclosure', 'app', 'contact', 'cookies', 'instruction', 'mob-cash', 'partner-benefits', 'privacy', 'terms']);
