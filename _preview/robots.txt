@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://dbbetaff.com/sitemap.xml
