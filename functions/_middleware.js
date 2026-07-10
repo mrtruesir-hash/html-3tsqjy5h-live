@@ -45,6 +45,14 @@ export async function onRequest(context) {
   try {
     const url = new URL(context.request.url);
 
+    // 0a. Never serve the build-staging dir. `_preview/` is the generator's scratch output
+    //     (copy-to-root promotes it to the real paths). It's removed from git + gitignored,
+    //     but the Cloudflare build regenerates it, so block it here so /_preview/* can't be
+    //     crawled as a full duplicate of the site. Must run BEFORE the isFileRequest passthrough.
+    if (url.pathname === '/_preview' || url.pathname.startsWith('/_preview/')) {
+      return new Response('Not Found', { status: 404, headers: { 'content-type': 'text/plain', 'x-robots-tag': 'noindex' } });
+    }
+
     // 0. NEVER rewrite static-asset requests — serve them exactly as asked.
     //    Without this, rule 1 would 301 /styles.css -> /styles.css/ (a path that does not
     //    exist), breaking CSS/JS/images/sitemap site-wide (every page renders unstyled).
