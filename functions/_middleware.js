@@ -59,6 +59,14 @@ export async function onRequest(context) {
       return new Response('Not Found', { status: 404, headers: { 'content-type': 'text/plain', 'x-robots-tag': 'noindex' } });
     }
 
+    // -1. www -> apex normalization (canonical tags sitewide already self-reference the apex
+    //     domain). Runs first, for every request type including static assets, so www never
+    //     serves duplicate/parallel content — it always 301s to the canonical host.
+    if (url.hostname === 'www.dbbetaff.com') {
+      const target = new URL(url.pathname + url.search, 'https://dbbetaff.com');
+      return Response.redirect(target.href, 301);
+    }
+
     // 0. NEVER rewrite static-asset requests — serve them exactly as asked.
     //    Without this, rule 1 would 301 /styles.css -> /styles.css/ (a path that does not
     //    exist), breaking CSS/JS/images/sitemap site-wide (every page renders unstyled).
