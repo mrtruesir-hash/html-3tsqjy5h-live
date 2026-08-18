@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CPA vs RevShare Calculator | Compare Affiliate Commission Models</title>
+<meta name="description" content="Free calculator comparing CPA, RevShare and Hybrid iGaming affiliate income, with the break-even point between models. Client-side, no data stored.">
+<link rel="canonical" href="https://dbbetaff.com/tools/cpa-vs-revshare-calculator/">
+<meta name="robots" content="index,follow">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="DBBET Partners">
+<meta property="og:title" content="CPA vs RevShare Calculator | Compare Affiliate Commission Models">
+<meta property="og:description" content="Free calculator comparing CPA, RevShare and Hybrid iGaming affiliate income, with the break-even point between models. Client-side, no data stored.">
+<meta property="og:url" content="https://dbbetaff.com/tools/cpa-vs-revshare-calculator/">
+<meta property="og:image" content="https://dbbetaff.com/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="CPA vs RevShare Calculator | Compare Affiliate Commission Models">
+<meta name="twitter:description" content="Free calculator comparing CPA, RevShare and Hybrid iGaming affiliate income, with the break-even point between models. Client-side, no data stored.">
+<meta name="twitter:image" content="https://dbbetaff.com/og-image.jpg">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://dbbetaff.com/#org","name":"DBBET Partners","url":"https://dbbetaff.com/","logo":"https://dbbetaff.com/og-image.jpg","description":"Premium iGaming affiliate program offering RevShare, CPA and Hybrid commission models.","sameAs":["https://www.trustpilot.com/review/dbbetaff.com"],"founder":{"@id":"https://dbbetaff.com/#ray"}},{"@type":"Person","@id":"https://dbbetaff.com/#ray","name":"Ray Truelead","jobTitle":"Head of Affiliates","worksFor":{"@id":"https://dbbetaff.com/#org"},"sameAs":["https://www.linkedin.com/in/ray-trulead-022a061b8","https://t.me/Ray_Lead"]},{"@type":"WebSite","@id":"https://dbbetaff.com/#website","url":"https://dbbetaff.com/","name":"DBBET Partners","publisher":{"@id":"https://dbbetaff.com/#org"}},{"@type":"WebPage","@id":"https://dbbetaff.com/tools/cpa-vs-revshare-calculator/#webpage","url":"https://dbbetaff.com/tools/cpa-vs-revshare-calculator/","name":"CPA vs RevShare Calculator | Compare Affiliate Commission Models","description":"Free calculator comparing CPA, RevShare and Hybrid iGaming affiliate income, with the break-even point between models. Client-side, no data stored.","inLanguage":"en","isPartOf":{"@id":"https://dbbetaff.com/#website"},"about":{"@id":"https://dbbetaff.com/#org"},"author":{"@id":"https://dbbetaff.com/#ray"},"dateModified":"2026-08-19"},{"@type":"BreadcrumbList","@id":"https://dbbetaff.com/tools/cpa-vs-revshare-calculator/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://dbbetaff.com/"},{"@type":"ListItem","position":2,"name":"Tools","item":"https://dbbetaff.com/tools/"},{"@type":"ListItem","position":3,"name":"CPA vs RevShare Calculator","item":"https://dbbetaff.com/tools/cpa-vs-revshare-calculator/"}]},{"@type":"SoftwareApplication","@id":"https://dbbetaff.com/tools/cpa-vs-revshare-calculator/#app","name":"CPA vs RevShare Calculator","applicationCategory":"BusinessApplication","operatingSystem":"Any (runs in browser)","url":"https://dbbetaff.com/tools/cpa-vs-revshare-calculator/","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"A free, client-side calculator comparing CPA, RevShare and Hybrid iGaming affiliate commission income and the break-even point between them."},{"@type":"FAQPage","@id":"https://dbbetaff.com/tools/cpa-vs-revshare-calculator/#faq","mainEntity":[{"@type":"Question","name":"Which model should I pick, CPA or RevShare?","acceptedAnswer":{"@type":"Answer","text":"It depends on how long your referred players stay active. This calculator's break-even figure shows how many months of RevShare it would take to match a given CPA payment on the same player — compare that to your own typical player retention."}},{"@type":"Question","name":"Does this reflect DBBET's actual commercial terms?","acceptedAnswer":{"@type":"Answer","text":"No. This is a generic educational calculator using whatever numbers you enter. It does not assume or apply any specific DBBET rate — see the DBBET Affiliate Program page for DBBET's own verified terms."}},{"@type":"Question","name":"Why might my real earnings differ from this estimate?","acceptedAnswer":{"@type":"Answer","text":"Real affiliate agreements often include negative carryover, deductions, caps, minimum deposit thresholds, qualification rules, attribution windows, and player or GEO restrictions that this simplified calculator does not model."}}]}]}</script>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="stylesheet" href="/styles.css">
+<style>
+.calc-field{display:flex;flex-direction:column;gap:4px}
+.calc-field label{font-size:13px;color:#cfd2d8;font-weight:600}
+.calc-field .hint{font-size:12px;color:#777;font-weight:400}
+.calc-field input{background:#0f0f14;border:1px solid #2a2a35;border-radius:8px;color:#fff;padding:10px 12px;font-size:15px;width:100%}
+.calc-field input:focus{outline:2px solid #ff3b6b;outline-offset:1px;border-color:#ff3b6b}
+.calc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-bottom:22px}
+.calc-legend{color:#fff;font-weight:700;font-size:15px;margin:26px 0 12px;border-bottom:1px solid #262630;padding-bottom:8px}
+.calc-btn{background:linear-gradient(135deg,#ff3b6b,#b3164a);color:#fff;border:none;font-weight:700;padding:13px 28px;border-radius:30px;font-size:15px;cursor:pointer}
+.calc-btn:focus{outline:2px solid #fff;outline-offset:2px}
+.results-box{background:#16161c;border:1px solid #262630;border-radius:14px;padding:22px;margin-top:24px}
+.result-row{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid #22222b;font-size:14px}
+.result-row:last-child{border-bottom:none}
+.result-row .val{color:#fff;font-weight:700}
+.tag{display:inline-block;background:#2a1620;color:#ff8ba7;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;padding:2px 8px;border-radius:20px;margin-bottom:12px}
+.bar-wrap{margin:6px 0 14px}
+.bar-label{display:flex;justify-content:space-between;font-size:13px;color:#cfd2d8;margin-bottom:4px}
+.bar-track{background:#0f0f14;border-radius:8px;height:14px;overflow:hidden;border:1px solid #262630}
+.bar-fill{height:100%;border-radius:8px 0 0 8px;background:linear-gradient(90deg,#ff3b6b,#b3164a)}
+</style>
+</head>
+<body>
+<header class="site-header" id="siteHeader">
+<div class="header-inner">
+<a class="logo" href="/"><span class="logo-db"><img class="logo-mark" src="/favicon.svg" alt="DB"></span><span class="logo-bet">BET</span><span class="logo-sub">PARTNERS</span></a>
+<nav class="main-nav" id="mainNav">
+<a class="nav-link" href="/">AFFILIATE HUB</a>
+<a class="nav-link" href="/partner-benefits/">PARTNER BENEFITS</a>
+<a class="nav-link" href="/instruction/">INSTRUCTION</a>
+<a class="nav-link" href="/mob-cash/">MOB-CASH AGENT</a>
+</nav>
+</div>
+</header>
+
+<main class="page-wrap" style="max-width:820px;margin:0 auto;padding:48px 20px 60px;line-height:1.65">
+<p style="margin-bottom:8px;font-size:14px;color:#9aa0aa"><a href="/" style="color:#9aa0aa">Home</a> &rsaquo; <a href="/tools/" style="color:#9aa0aa">Tools</a> &rsaquo; CPA vs RevShare Calculator</p>
+<span class="tag">Free tool &middot; example / estimate</span>
+<h1 style="margin-bottom:6px">CPA vs RevShare Calculator</h1>
+<p style="color:#9aa0aa;font-size:14px;margin-bottom:20px">By <a href="/authors/" style="color:#9aa0aa">Ray Truelead</a>, Head of Affiliates &middot; Updated 2026-08-19</p>
+
+<p>Compare estimated income under CPA, RevShare and Hybrid using your own numbers, plus the break-even point where RevShare starts to out-earn a flat CPA payment. This uses generic, educational inputs — it does not assume any specific program's terms.</p>
+
+<form id="calcForm" novalidate>
+<div class="calc-grid">
+<div class="calc-field"><label for="ftds">Number of FTDs</label><input type="number" id="ftds" min="0" step="1" placeholder="e.g. 30"></div>
+<div class="calc-field"><label for="cpa">CPA per FTD ($)</label><input type="number" id="cpa" min="0" step="0.01" placeholder="e.g. 100"></div>
+<div class="calc-field"><label for="ngr">Avg. monthly NGR per player ($)</label><input type="number" id="ngr" min="0" step="0.01" placeholder="e.g. 50"></div>
+<div class="calc-field"><label for="revshare">RevShare (%)</label><input type="number" id="revshare" min="0" max="100" step="0.1" placeholder="e.g. 40"></div>
+<div class="calc-field"><label for="months">Number of months</label><input type="number" id="months" min="1" step="1" placeholder="e.g. 6" value="6"></div>
+<div class="calc-field"><label for="hybridCpa">Hybrid CPA ($)<span class="hint"> optional</span></label><input type="number" id="hybridCpa" min="0" step="0.01" placeholder="e.g. 40"></div>
+<div class="calc-field"><label for="hybridRevshare">Hybrid RevShare (%)<span class="hint"> optional</span></label><input type="number" id="hybridRevshare" min="0" max="100" step="0.1" placeholder="e.g. 20"></div>
+</div>
+
+<button type="submit" class="calc-btn">Compare models</button>
+<button type="button" class="calc-btn" id="resetBtn" style="background:#22222b;margin-left:10px">Reset</button>
+
+<noscript><p style="color:#ff8ba7;margin-top:16px">This calculator requires JavaScript to run. Please enable JavaScript to see a result.</p></noscript>
+
+<div id="results" class="results-box" aria-live="polite" role="status">
+<p style="margin:0;color:#9aa0aa">Enter FTDs plus at least one commission model above and press "Compare models" to see a result here.</p>
+</div>
+
+<details style="margin-top:18px">
+<summary style="color:#ff3b6b;cursor:pointer;font-size:14px">Show the formulas used</summary>
+<div style="font-size:14px;color:#ccc;margin-top:10px;line-height:1.8">
+<p>CPA income = FTDs &times; CPA per FTD</p>
+<p>RevShare income = FTDs &times; (RevShare % &divide; 100) &times; Avg. monthly NGR &times; Months</p>
+<p>Hybrid income = (FTDs &times; Hybrid CPA) + (FTDs &times; (Hybrid RevShare % &divide; 100) &times; Avg. monthly NGR &times; Months)</p>
+<p>Break-even months = CPA per FTD &divide; (RevShare % &divide; 100 &times; Avg. monthly NGR) &mdash; the number of months of RevShare it takes to match the CPA payment on one player</p>
+</div>
+</details>
+
+<p style="margin-top:16px;font-size:13px;color:#9aa0aa">Real affiliate agreements may also include negative carryover, deductions, caps, minimum deposit thresholds, qualification rules, attribution windows, and player or GEO restrictions — none of which this simplified calculator models. Confirm actual terms with any specific program before relying on this estimate.</p>
+
+<div style="margin-top:14px;padding:16px 18px;background:#1a1216;border:1px solid #3a1f28;border-radius:10px;font-size:13px;color:#c9a9b2">
+These calculations are estimates for planning purposes only. Actual affiliate earnings depend on the affiliate agreement, player activity, traffic quality, deductions, attribution rules and other commercial terms.
+</div>
+</form>
+
+<h2 style="margin-top:44px">What CPA means</h2>
+<p>Cost Per Acquisition (CPA) is a fixed, one-time payment for each qualifying referred player, usually triggered by a first deposit. It's predictable but capped &mdash; a player who stays for years pays you the same amount as one who deposits once and leaves.</p>
+
+<h2>What RevShare means</h2>
+<p>Revenue Share (RevShare) pays an ongoing percentage of each referred player's net gaming revenue, for as long as they remain active. See <a href="/guides/what-is-revshare/">What Is RevShare?</a> for the full mechanics, including how net revenue is typically defined.</p>
+
+<h2>What Hybrid means</h2>
+<p>Hybrid combines a smaller upfront CPA with a reduced ongoing RevShare on the same player &mdash; a hedge between immediate cash flow and long-term upside. See <a href="/guides/cpa-vs-revshare/">CPA vs RevShare vs Hybrid</a> for a full comparison.</p>
+
+<h2>When CPA may be preferable</h2>
+<p>CPA tends to suit paid media, short campaigns tied to a single event, or high-churn traffic where you want certainty per player rather than betting on retention you can't control.</p>
+
+<h2>When RevShare may be preferable</h2>
+<p>RevShare tends to suit loyal, organic or content-driven traffic where referred players stay active for months, letting the recurring percentage compound well past what a one-time CPA would have paid.</p>
+
+<h2>Why player retention matters</h2>
+<p>The whole CPA-vs-RevShare decision reduces to one variable: how long your referred players keep playing. The break-even calculation above tells you the exact retention period at which RevShare starts winning &mdash; below it, CPA wins; above it, RevShare wins.</p>
+
+<h2>Why actual agreements differ</h2>
+<p>Real-world deals frequently include mechanics this calculator doesn't model: negative carryover (a losing month can offset future RevShare), deductions for bonuses or fees, monthly caps, minimum qualifying deposits, attribution-window rules, and GEO or traffic-source restrictions. Always confirm the specific terms of any program directly before committing traffic based on a calculator estimate.</p>
+
+<h2>Example calculation</h2>
+<p style="color:#9aa0aa;font-size:14px">Example / estimate — hypothetical numbers, not DBBET data.</p>
+<p>30 FTDs at a hypothetical $100 CPA = <strong>$3,000</strong> immediately. The same 30 FTDs at a hypothetical 40% RevShare with $50 average monthly NGR per player: $50 &times; 0.40 = $20/player/month &times; 30 players = $600/month. Break-even = $100 &divide; $20 = <strong>5 months</strong>. Past month 5, RevShare has out-earned the CPA option on this cohort. Try these numbers in the calculator above.</p>
+
+<h2>FAQ</h2>
+<div class="faq-block">
+<details><summary>Which model should I pick, CPA or RevShare?</summary><p>It depends on how long your referred players stay active. This calculator's break-even figure shows how many months of RevShare it would take to match a given CPA payment on the same player — compare that to your own typical player retention.</p></details>
+<details><summary>Does this reflect DBBET's actual commercial terms?</summary><p>No. This is a generic educational calculator using whatever numbers you enter. It does not assume or apply any specific DBBET rate — see the DBBET Affiliate Program page for DBBET's own verified terms.</p></details>
+<details><summary>Why might my real earnings differ from this estimate?</summary><p>Real affiliate agreements often include negative carryover, deductions, caps, minimum deposit thresholds, qualification rules, attribution windows, and player or GEO restrictions that this simplified calculator does not model.</p></details>
+</div>
+
+<p style="margin-top:32px;font-size:14px;color:#9aa0aa">Related: <a href="/tools/affiliate-revenue-calculator/" style="color:#9aa0aa">Affiliate Revenue Calculator</a> &middot; <a href="/guides/cpa-vs-revshare/" style="color:#9aa0aa">CPA vs RevShare vs Hybrid</a> &middot; <a href="/dbbet-affiliate-program/" style="color:#9aa0aa">The DBBET Affiliate Program</a></p>
+</main>
+
+<footer class="site-footer">
+<div class="container footer-inner">
+<div class="footer-brand"><span class="logo-db"><img class="logo-mark" src="/favicon.svg" alt="DB"></span><span class="logo-bet">BET PARTNERS</span>
+<p>Free affiliate marketing tools and independent DBBET affiliate program information.</p></div>
+<div class="footer-cols">
+<div><h5>Affiliates</h5><a href="/partner-benefits/">Partner Benefits</a><a href="/instruction/">Instruction</a><a href="/mob-cash/">Mob-Cash Agent</a><a href="/blog/">Blog</a><a href="/guides/">Guides</a><a href="/tools/">Tools</a><a href="/research/">Research</a><a href="/dbbet-affiliate-program/">DBBET Affiliate Program</a></div>
+<div><h5>Company</h5><a href="/about/">About</a><a href="/authors/">Authors</a><a href="/editorial-policy/">Editorial Policy</a><a href="/contact/">Contact</a></div>
+</div>
+</div>
+<div class="footer-bottom"><div class="container"><div class="footer-legal-links"><a href="/terms/">Terms</a><a href="/privacy/">Privacy</a><a href="/cookies/">Cookies</a><a href="/affiliate-disclosure/">Affiliate Disclosure</a><a href="/responsible-gambling/">Responsible Gambling</a><a href="/about/">About</a><a href="/contact/">Contact</a></div></div></div>
+</footer>
+<div class="mobile-join-bar"><a class="btn btn-join mobile-join-btn" href="/partner-benefits/">Become a Partner</a></div>
+
+<script>
+(function(){
+  function num(id){
+    var el = document.getElementById(id);
+    if (!el) return null;
+    var v = (el.value || '').trim();
+    if (v === '') return null;
+    var n = parseFloat(v);
+    return isNaN(n) ? null : n;
+  }
+  function fmtMoney(n){
+    if (n === null || n === undefined || !isFinite(n)) return '&mdash;';
+    return '$' + n.toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2});
+  }
+  function row(label, value){
+    return '<div class="result-row"><span>' + label + '</span><span class="val">' + value + '</span></div>';
+  }
+  function bar(label, value, max){
+    var pct = max > 0 ? Math.max(2, Math.round((value / max) * 100)) : 0;
+    return '<div class="bar-wrap"><div class="bar-label"><span>' + label + '</span><span>' + fmtMoney(value) + '</span></div><div class="bar-track"><div class="bar-fill" style="width:' + pct + '%"></div></div></div>';
+  }
+
+  var form = document.getElementById('calcForm');
+  var out = document.getElementById('results');
+  var resetBtn = document.getElementById('resetBtn');
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    try {
+      var ftds = num('ftds');
+      var cpa = num('cpa');
+      var ngr = num('ngr');
+      var revshare = num('revshare');
+      var months = num('months');
+      if (months === null || months <= 0) months = 1;
+      var hybridCpa = num('hybridCpa');
+      var hybridRevshare = num('hybridRevshare');
+
+      if (ftds === null || ftds <= 0) {
+        out.innerHTML = '<p style="margin:0;color:#ff8ba7">Enter a number of FTDs plus at least one commission model to compare.</p>';
+        return;
+      }
+
+      var cpaIncome = cpa !== null ? ftds * cpa : null;
+      var revshareIncome = (revshare !== null && ngr !== null) ? ftds * (revshare/100) * ngr * months : null;
+      var hybridIncome = (hybridCpa !== null && hybridRevshare !== null && ngr !== null) ? (ftds * hybridCpa) + (ftds * (hybridRevshare/100) * ngr * months) : null;
+
+      if (cpaIncome === null && revshareIncome === null && hybridIncome === null) {
+        out.innerHTML = '<p style="margin:0;color:#ff8ba7">Enter at least one full commission model (CPA, or RevShare + average NGR) to compare.</p>';
+        return;
+      }
+
+      var html = '<span class="tag">Example / estimate</span>';
+
+      var maxVal = Math.max(cpaIncome || 0, revshareIncome || 0, hybridIncome || 0);
+      if (cpaIncome !== null) html += bar('CPA income', cpaIncome, maxVal);
+      if (revshareIncome !== null) html += bar('RevShare income (' + months + ' mo)', revshareIncome, maxVal);
+      if (hybridIncome !== null) html += bar('Hybrid income (' + months + ' mo)', hybridIncome, maxVal);
+
+      if (cpaIncome !== null) html += row('CPA income', fmtMoney(cpaIncome));
+      if (revshareIncome !== null) html += row('RevShare income (' + months + ' month' + (months == 1 ? '' : 's') + ')', fmtMoney(revshareIncome));
+      if (hybridIncome !== null) html += row('Hybrid income (' + months + ' month' + (months == 1 ? '' : 's') + ')', fmtMoney(hybridIncome));
+
+      if (cpaIncome !== null && revshareIncome !== null) {
+        var diff = revshareIncome - cpaIncome;
+        html += row('Difference (RevShare &minus; CPA)', (diff >= 0 ? '+' : '') + fmtMoney(diff));
+      }
+
+      if (cpa !== null && revshare !== null && ngr !== null && revshare > 0 && ngr > 0) {
+        var monthlyRevSharePerPlayer = (revshare/100) * ngr;
+        var breakEven = monthlyRevSharePerPlayer > 0 ? cpa / monthlyRevSharePerPlayer : null;
+        if (breakEven !== null && isFinite(breakEven)) {
+          html += row('Break-even point', breakEven.toFixed(1) + ' months');
+        }
+      }
+
+      out.innerHTML = html;
+    } catch (err) {
+      out.innerHTML = '<p style="margin:0;color:#ff8ba7">Something went wrong reading these inputs — please check the values and try again.</p>';
+    }
+  });
+
+  resetBtn.addEventListener('click', function(){
+    form.reset();
+    out.innerHTML = '<p style="margin:0;color:#9aa0aa">Enter FTDs plus at least one commission model above and press "Compare models" to see a result here.</p>';
+  });
+})();
+</script>
+</body>
+</html>

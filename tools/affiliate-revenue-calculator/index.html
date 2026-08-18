@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Affiliate Revenue Calculator | Estimate CPA, RevShare &amp; Hybrid Income</title>
+<meta name="description" content="Free calculator to estimate iGaming affiliate revenue from clicks, registrations and FTDs under CPA, RevShare or Hybrid commission models. Client-side, no data stored.">
+<link rel="canonical" href="https://dbbetaff.com/tools/affiliate-revenue-calculator/">
+<meta name="robots" content="index,follow">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="DBBET Partners">
+<meta property="og:title" content="Affiliate Revenue Calculator | Estimate CPA, RevShare &amp; Hybrid Income">
+<meta property="og:description" content="Free calculator to estimate iGaming affiliate revenue from clicks, registrations and FTDs under CPA, RevShare or Hybrid commission models. Client-side, no data stored.">
+<meta property="og:url" content="https://dbbetaff.com/tools/affiliate-revenue-calculator/">
+<meta property="og:image" content="https://dbbetaff.com/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Affiliate Revenue Calculator | Estimate CPA, RevShare &amp; Hybrid Income">
+<meta name="twitter:description" content="Free calculator to estimate iGaming affiliate revenue from clicks, registrations and FTDs under CPA, RevShare or Hybrid commission models. Client-side, no data stored.">
+<meta name="twitter:image" content="https://dbbetaff.com/og-image.jpg">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://dbbetaff.com/#org","name":"DBBET Partners","url":"https://dbbetaff.com/","logo":"https://dbbetaff.com/og-image.jpg","description":"Premium iGaming affiliate program offering RevShare, CPA and Hybrid commission models.","sameAs":["https://www.trustpilot.com/review/dbbetaff.com"],"founder":{"@id":"https://dbbetaff.com/#ray"}},{"@type":"Person","@id":"https://dbbetaff.com/#ray","name":"Ray Truelead","jobTitle":"Head of Affiliates","worksFor":{"@id":"https://dbbetaff.com/#org"},"sameAs":["https://www.linkedin.com/in/ray-trulead-022a061b8","https://t.me/Ray_Lead"]},{"@type":"WebSite","@id":"https://dbbetaff.com/#website","url":"https://dbbetaff.com/","name":"DBBET Partners","publisher":{"@id":"https://dbbetaff.com/#org"}},{"@type":"WebPage","@id":"https://dbbetaff.com/tools/affiliate-revenue-calculator/#webpage","url":"https://dbbetaff.com/tools/affiliate-revenue-calculator/","name":"Affiliate Revenue Calculator | Estimate CPA, RevShare & Hybrid Income","description":"Free calculator to estimate iGaming affiliate revenue from clicks, registrations and FTDs under CPA, RevShare or Hybrid commission models. Client-side, no data stored.","inLanguage":"en","isPartOf":{"@id":"https://dbbetaff.com/#website"},"about":{"@id":"https://dbbetaff.com/#org"},"author":{"@id":"https://dbbetaff.com/#ray"},"dateModified":"2026-08-19"},{"@type":"BreadcrumbList","@id":"https://dbbetaff.com/tools/affiliate-revenue-calculator/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://dbbetaff.com/"},{"@type":"ListItem","position":2,"name":"Tools","item":"https://dbbetaff.com/tools/"},{"@type":"ListItem","position":3,"name":"Affiliate Revenue Calculator","item":"https://dbbetaff.com/tools/affiliate-revenue-calculator/"}]},{"@type":"SoftwareApplication","@id":"https://dbbetaff.com/tools/affiliate-revenue-calculator/#app","name":"Affiliate Revenue Calculator","applicationCategory":"BusinessApplication","operatingSystem":"Any (runs in browser)","url":"https://dbbetaff.com/tools/affiliate-revenue-calculator/","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"A free, client-side calculator that estimates iGaming affiliate revenue under CPA, RevShare and Hybrid commission models from clicks, registrations and FTDs."},{"@type":"FAQPage","@id":"https://dbbetaff.com/tools/affiliate-revenue-calculator/#faq","mainEntity":[{"@type":"Question","name":"Does this calculator show my actual DBBET earnings?","acceptedAnswer":{"@type":"Answer","text":"No. This tool produces a hypothetical estimate based on the numbers you enter for planning purposes only. It does not access, use or reflect any real DBBET account, dashboard or commercial data."}},{"@type":"Question","name":"Do I need to fill in every field?","acceptedAnswer":{"@type":"Answer","text":"No. You can enter registrations and FTDs directly if you already know them, or let the calculator estimate them from clicks and conversion rates. Only fill in the commission fields for the model(s) you want to compare."}},{"@type":"Question","name":"Is my data sent to a server?","acceptedAnswer":{"@type":"Answer","text":"No. All calculations run in your browser using JavaScript. Nothing you type into this calculator is transmitted or stored anywhere."}}]}]}</script>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="stylesheet" href="/styles.css">
+<style>
+.calc-field{display:flex;flex-direction:column;gap:4px}
+.calc-field label{font-size:13px;color:#cfd2d8;font-weight:600}
+.calc-field .hint{font-size:12px;color:#777;font-weight:400}
+.calc-field input{background:#0f0f14;border:1px solid #2a2a35;border-radius:8px;color:#fff;padding:10px 12px;font-size:15px;width:100%}
+.calc-field input:focus{outline:2px solid #ff3b6b;outline-offset:1px;border-color:#ff3b6b}
+.calc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-bottom:22px}
+.calc-legend{color:#fff;font-weight:700;font-size:15px;margin:26px 0 12px;border-bottom:1px solid #262630;padding-bottom:8px}
+.calc-btn{background:linear-gradient(135deg,#ff3b6b,#b3164a);color:#fff;border:none;font-weight:700;padding:13px 28px;border-radius:30px;font-size:15px;cursor:pointer}
+.calc-btn:focus{outline:2px solid #fff;outline-offset:2px}
+.results-box{background:#16161c;border:1px solid #262630;border-radius:14px;padding:22px;margin-top:24px}
+.result-row{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid #22222b;font-size:14px}
+.result-row:last-child{border-bottom:none}
+.result-row .val{color:#fff;font-weight:700}
+.tag{display:inline-block;background:#2a1620;color:#ff8ba7;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;padding:2px 8px;border-radius:20px;margin-bottom:12px}
+</style>
+</head>
+<body>
+<header class="site-header" id="siteHeader">
+<div class="header-inner">
+<a class="logo" href="/"><span class="logo-db"><img class="logo-mark" src="/favicon.svg" alt="DB"></span><span class="logo-bet">BET</span><span class="logo-sub">PARTNERS</span></a>
+<nav class="main-nav" id="mainNav">
+<a class="nav-link" href="/">AFFILIATE HUB</a>
+<a class="nav-link" href="/partner-benefits/">PARTNER BENEFITS</a>
+<a class="nav-link" href="/instruction/">INSTRUCTION</a>
+<a class="nav-link" href="/mob-cash/">MOB-CASH AGENT</a>
+</nav>
+</div>
+</header>
+
+<main class="page-wrap" style="max-width:820px;margin:0 auto;padding:48px 20px 60px;line-height:1.65">
+<p style="margin-bottom:8px;font-size:14px;color:#9aa0aa"><a href="/" style="color:#9aa0aa">Home</a> &rsaquo; <a href="/tools/" style="color:#9aa0aa">Tools</a> &rsaquo; Affiliate Revenue Calculator</p>
+<span class="tag">Free tool &middot; example / estimate</span>
+<h1 style="margin-bottom:6px">Affiliate Revenue Calculator</h1>
+<p style="color:#9aa0aa;font-size:14px;margin-bottom:20px">By <a href="/authors/" style="color:#9aa0aa">Ray Truelead</a>, Head of Affiliates &middot; Updated 2026-08-19</p>
+
+<p>Estimate potential affiliate revenue from your traffic under a CPA, RevShare or Hybrid commission model. Every field below is optional except at least a valid combination — fill in what you know and leave the rest blank. All maths runs in your browser; nothing you type is sent anywhere.</p>
+
+<form id="calcForm" novalidate>
+<div class="calc-legend">Traffic &amp; conversion <span style="font-weight:400;color:#777;font-size:13px">(optional — skip if you already know your registrations/FTDs)</span></div>
+<div class="calc-grid">
+<div class="calc-field"><label for="clicks">Clicks</label><input type="number" id="clicks" min="0" step="1" placeholder="e.g. 2000"></div>
+<div class="calc-field"><label for="regRate">Registration rate (%)<span class="hint"> of clicks</span></label><input type="number" id="regRate" min="0" max="100" step="0.1" placeholder="e.g. 6"></div>
+<div class="calc-field"><label for="regs">Registrations<span class="hint"> (overrides clicks &times; rate if filled)</span></label><input type="number" id="regs" min="0" step="1" placeholder="e.g. 120"></div>
+<div class="calc-field"><label for="ftdRate">FTD rate (%)<span class="hint"> of registrations</span></label><input type="number" id="ftdRate" min="0" max="100" step="0.1" placeholder="e.g. 30"></div>
+<div class="calc-field"><label for="ftds">FTDs<span class="hint"> (overrides registrations &times; rate if filled)</span></label><input type="number" id="ftds" min="0" step="1" placeholder="e.g. 36"></div>
+</div>
+
+<div class="calc-legend">Commission inputs <span style="font-weight:400;color:#777;font-size:13px">(fill in whichever model(s) you want to see)</span></div>
+<div class="calc-grid">
+<div class="calc-field"><label for="cpa">CPA amount ($)</label><input type="number" id="cpa" min="0" step="0.01" placeholder="e.g. 90"></div>
+<div class="calc-field"><label for="revshare">RevShare (%)</label><input type="number" id="revshare" min="0" max="100" step="0.1" placeholder="e.g. 40"></div>
+<div class="calc-field"><label for="ngr">Avg. monthly NGR per active player ($)</label><input type="number" id="ngr" min="0" step="0.01" placeholder="e.g. 45"></div>
+<div class="calc-field"><label for="months">Number of months</label><input type="number" id="months" min="1" step="1" placeholder="e.g. 1" value="1"></div>
+<div class="calc-field"><label for="hybridCpa">Hybrid CPA ($)<span class="hint"> optional</span></label><input type="number" id="hybridCpa" min="0" step="0.01" placeholder="e.g. 40"></div>
+<div class="calc-field"><label for="hybridRevshare">Hybrid RevShare (%)<span class="hint"> optional</span></label><input type="number" id="hybridRevshare" min="0" max="100" step="0.1" placeholder="e.g. 20"></div>
+</div>
+
+<button type="submit" class="calc-btn">Calculate estimate</button>
+<button type="button" class="calc-btn" id="resetBtn" style="background:#22222b;margin-left:10px">Reset</button>
+
+<noscript><p style="color:#ff8ba7;margin-top:16px">This calculator requires JavaScript to run. Please enable JavaScript to see a result.</p></noscript>
+
+<div id="results" class="results-box" aria-live="polite" role="status">
+<p style="margin:0;color:#9aa0aa">Enter your numbers above and press "Calculate estimate" to see a result here.</p>
+</div>
+
+<details style="margin-top:18px">
+<summary style="color:#ff3b6b;cursor:pointer;font-size:14px">Show the formulas used</summary>
+<div style="font-size:14px;color:#ccc;margin-top:10px;line-height:1.8">
+<p>Registrations = registrations input, or Clicks &times; (Registration rate &divide; 100)</p>
+<p>FTDs = FTDs input, or Registrations &times; (FTD rate &divide; 100)</p>
+<p>CPA revenue = FTDs &times; CPA amount</p>
+<p>RevShare revenue = FTDs &times; (RevShare % &divide; 100) &times; Avg. monthly NGR &times; Months</p>
+<p>Hybrid revenue = (FTDs &times; Hybrid CPA) + (FTDs &times; (Hybrid RevShare % &divide; 100) &times; Avg. monthly NGR &times; Months)</p>
+<p>Revenue per click = Revenue &divide; Clicks</p>
+<p>Effective CPA = Revenue &divide; FTDs</p>
+</div>
+</details>
+
+<div style="margin-top:22px;padding:16px 18px;background:#1a1216;border:1px solid #3a1f28;border-radius:10px;font-size:13px;color:#c9a9b2">
+These calculations are estimates for planning purposes only. Actual affiliate earnings depend on the affiliate agreement, player activity, traffic quality, deductions, attribution rules and other commercial terms.
+</div>
+</form>
+
+<h2 style="margin-top:44px">What is affiliate revenue?</h2>
+<p>In iGaming, affiliate revenue is the commission an operator pays you for referring players who register and play through your tracking link. It's not revenue from selling anything to your audience — it comes entirely from the operator, calculated according to whichever commission model your deal uses. See <a href="/guides/what-is-an-igaming-affiliate-program/">What Is an iGaming Affiliate Program?</a> for the full mechanics.</p>
+
+<h2>How CPA revenue is calculated</h2>
+<p>CPA (Cost Per Acquisition) revenue is simply the number of qualifying FTDs multiplied by the fixed CPA amount: <code>FTDs &times; CPA amount</code>. It's a one-time payment per player, so it doesn't grow if that player keeps playing afterward.</p>
+
+<h2>How RevShare revenue is calculated</h2>
+<p>RevShare revenue is a percentage of each referred player's net gaming revenue (NGR), paid for as long as they stay active: <code>FTDs &times; RevShare % &times; average monthly NGR per player &times; number of months</code>. See <a href="/guides/what-is-revshare/">What Is RevShare?</a> for how NGR is actually defined.</p>
+
+<h2>How hybrid revenue is calculated</h2>
+<p>Hybrid combines both: a smaller CPA paid immediately, plus an ongoing (usually reduced) RevShare on the same players. The formula simply adds the two: <code>(FTDs &times; Hybrid CPA) + (FTDs &times; Hybrid RevShare % &times; average monthly NGR &times; months)</code>. See <a href="/guides/cpa-vs-revshare/">CPA vs RevShare vs Hybrid</a> for when each model tends to win.</p>
+
+<h2>What FTD means</h2>
+<p>FTD stands for First Time Deposit — the first qualifying real-money deposit a registered player makes. It's usually the event that triggers CPA payment and the point from which RevShare-eligible revenue starts accruing.</p>
+
+<h2>Why actual earnings differ</h2>
+<p>Real payouts can differ from this estimate for reasons no calculator can account for: negative carryover on RevShare deals, deductions for bonuses or payment fees, minimum qualifying deposit thresholds, attribution-window losses, GEO or traffic-source restrictions, and simple variance in how long referred players actually stay active. Treat this tool as a planning aid, not a forecast.</p>
+
+<h2>Example calculation</h2>
+<p style="color:#9aa0aa;font-size:14px">Example / estimate — hypothetical numbers, not DBBET data.</p>
+<p>2,000 clicks &times; 6% registration rate = 120 registrations. 120 registrations &times; 30% FTD rate = 36 FTDs. At a hypothetical $90 CPA: 36 &times; $90 = <strong>$3,240</strong>. At a hypothetical 40% RevShare with $45 average monthly NGR per player over 1 month: 36 &times; 0.40 &times; $45 = <strong>$648</strong>. Try these exact numbers in the calculator above to see the full breakdown, including revenue per click and effective CPA.</p>
+
+<h2>FAQ</h2>
+<div class="faq-block">
+<details><summary>Does this calculator show my actual DBBET earnings?</summary><p>No. This tool produces a hypothetical estimate based on the numbers you enter for planning purposes only. It does not access, use or reflect any real DBBET account, dashboard or commercial data.</p></details>
+<details><summary>Do I need to fill in every field?</summary><p>No. You can enter registrations and FTDs directly if you already know them, or let the calculator estimate them from clicks and conversion rates. Only fill in the commission fields for the model(s) you want to compare.</p></details>
+<details><summary>Is my data sent to a server?</summary><p>No. All calculations run in your browser using JavaScript. Nothing you type into this calculator is transmitted or stored anywhere.</p></details>
+</div>
+
+<p style="margin-top:32px;font-size:14px;color:#9aa0aa">Related: <a href="/tools/cpa-vs-revshare-calculator/" style="color:#9aa0aa">CPA vs RevShare Calculator</a> &middot; <a href="/guides/affiliate-kpis/" style="color:#9aa0aa">iGaming Affiliate KPIs</a> &middot; <a href="/guides/cpa-vs-revshare/" style="color:#9aa0aa">CPA vs RevShare vs Hybrid</a> &middot; <a href="/dbbet-affiliate-program/" style="color:#9aa0aa">The DBBET Affiliate Program</a></p>
+</main>
+
+<footer class="site-footer">
+<div class="container footer-inner">
+<div class="footer-brand"><span class="logo-db"><img class="logo-mark" src="/favicon.svg" alt="DB"></span><span class="logo-bet">BET PARTNERS</span>
+<p>Free affiliate marketing tools and independent DBBET affiliate program information.</p></div>
+<div class="footer-cols">
+<div><h5>Affiliates</h5><a href="/partner-benefits/">Partner Benefits</a><a href="/instruction/">Instruction</a><a href="/mob-cash/">Mob-Cash Agent</a><a href="/blog/">Blog</a><a href="/guides/">Guides</a><a href="/tools/">Tools</a><a href="/research/">Research</a><a href="/dbbet-affiliate-program/">DBBET Affiliate Program</a></div>
+<div><h5>Company</h5><a href="/about/">About</a><a href="/authors/">Authors</a><a href="/editorial-policy/">Editorial Policy</a><a href="/contact/">Contact</a></div>
+</div>
+</div>
+<div class="footer-bottom"><div class="container"><div class="footer-legal-links"><a href="/terms/">Terms</a><a href="/privacy/">Privacy</a><a href="/cookies/">Cookies</a><a href="/affiliate-disclosure/">Affiliate Disclosure</a><a href="/responsible-gambling/">Responsible Gambling</a><a href="/about/">About</a><a href="/contact/">Contact</a></div></div></div>
+</footer>
+<div class="mobile-join-bar"><a class="btn btn-join mobile-join-btn" href="/partner-benefits/">Become a Partner</a></div>
+
+<script>
+(function(){
+  function num(id){
+    var el = document.getElementById(id);
+    if (!el) return null;
+    var v = (el.value || '').trim();
+    if (v === '') return null;
+    var n = parseFloat(v);
+    return isNaN(n) ? null : n;
+  }
+  function fmtMoney(n){
+    if (n === null || n === undefined || !isFinite(n)) return '&mdash;';
+    return '$' + n.toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2});
+  }
+  function fmtCount(n){
+    if (n === null || n === undefined || !isFinite(n)) return '&mdash;';
+    return Math.round(n).toLocaleString();
+  }
+  function row(label, value){
+    return '<div class="result-row"><span>' + label + '</span><span class="val">' + value + '</span></div>';
+  }
+  var form = document.getElementById('calcForm');
+  var out = document.getElementById('results');
+  var resetBtn = document.getElementById('resetBtn');
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    try {
+      var clicks = num('clicks');
+      var regRate = num('regRate');
+      var regsInput = num('regs');
+      var ftdRate = num('ftdRate');
+      var ftdsInput = num('ftds');
+      var cpa = num('cpa');
+      var revshare = num('revshare');
+      var ngr = num('ngr');
+      var months = num('months');
+      if (months === null || months <= 0) months = 1;
+      var hybridCpa = num('hybridCpa');
+      var hybridRevshare = num('hybridRevshare');
+
+      var registrations = regsInput !== null ? regsInput : ((clicks !== null && regRate !== null) ? clicks * (regRate/100) : null);
+      var ftds = ftdsInput !== null ? ftdsInput : ((registrations !== null && ftdRate !== null) ? registrations * (ftdRate/100) : null);
+
+      var cpaRevenue = (ftds !== null && cpa !== null) ? ftds * cpa : null;
+      var revshareRevenue = (ftds !== null && revshare !== null && ngr !== null) ? ftds * (revshare/100) * ngr * months : null;
+      var hybridRevenue = (ftds !== null && hybridCpa !== null && hybridRevshare !== null && ngr !== null) ? (ftds * hybridCpa) + (ftds * (hybridRevshare/100) * ngr * months) : null;
+
+      var anyResult = registrations !== null || ftds !== null || cpaRevenue !== null || revshareRevenue !== null || hybridRevenue !== null;
+      if (!anyResult) {
+        out.innerHTML = '<p style="margin:0;color:#ff8ba7">Enter at least clicks with conversion rates (or registrations/FTDs directly) plus one commission model to see an estimate.</p>';
+        return;
+      }
+
+      var html = '<span class="tag">Example / estimate</span>';
+      html += row('Estimated registrations', fmtCount(registrations));
+      html += row('Estimated FTDs', fmtCount(ftds));
+      if (cpaRevenue !== null) {
+        html += row('CPA revenue', fmtMoney(cpaRevenue));
+        if (clicks) html += row('&nbsp;&nbsp;Revenue per click (CPA)', fmtMoney(cpaRevenue / clicks));
+        if (ftds) html += row('&nbsp;&nbsp;Effective CPA', fmtMoney(cpaRevenue / ftds));
+      }
+      if (revshareRevenue !== null) {
+        html += row('RevShare revenue (' + months + ' month' + (months == 1 ? '' : 's') + ')', fmtMoney(revshareRevenue));
+        if (clicks) html += row('&nbsp;&nbsp;Revenue per click (RevShare)', fmtMoney(revshareRevenue / clicks));
+        if (ftds) html += row('&nbsp;&nbsp;Effective CPA-equivalent', fmtMoney(revshareRevenue / ftds));
+      }
+      if (hybridRevenue !== null) {
+        html += row('Hybrid revenue (' + months + ' month' + (months == 1 ? '' : 's') + ')', fmtMoney(hybridRevenue));
+        if (clicks) html += row('&nbsp;&nbsp;Revenue per click (Hybrid)', fmtMoney(hybridRevenue / clicks));
+        if (ftds) html += row('&nbsp;&nbsp;Effective CPA-equivalent', fmtMoney(hybridRevenue / ftds));
+      }
+      out.innerHTML = html;
+    } catch (err) {
+      out.innerHTML = '<p style="margin:0;color:#ff8ba7">Something went wrong reading these inputs — please check the values and try again.</p>';
+    }
+  });
+
+  resetBtn.addEventListener('click', function(){
+    form.reset();
+    out.innerHTML = '<p style="margin:0;color:#9aa0aa">Enter your numbers above and press "Calculate estimate" to see a result here.</p>';
+  });
+})();
+</script>
+</body>
+</html>

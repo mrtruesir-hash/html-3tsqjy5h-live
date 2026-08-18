@@ -1,0 +1,65 @@
+{
+  "program": "DBBET Partners",
+  "operator": "DBBET (Sport Tech N.V., Curaçao, registration 163475)",
+  "commission_models": [
+    {
+      "model": "RevShare",
+      "rate": "Up to 55%",
+      "notes": "Confirmed as an exact maximum figure, not an estimate.",
+      "data_type": "verified_first_party",
+      "last_verified": "2026-08-19",
+      "source": "DBBET Partners affiliate team (direct confirmation)"
+    },
+    {
+      "model": "CPA",
+      "rate": "Up to $110",
+      "notes": "Stated as a ceiling (\"up to\"), not a flat guaranteed rate per player.",
+      "data_type": "verified_first_party",
+      "last_verified": "2026-08-19",
+      "source": "DBBET Partners affiliate team (direct confirmation)"
+    },
+    {
+      "model": "Hybrid",
+      "rate": "Combination of CPA + RevShare",
+      "notes": "Program confirms the model exists; no fixed published hybrid split figure to report — confirm the exact mix with the affiliate team.",
+      "data_type": "verified_first_party_partial",
+      "last_verified": "2026-08-19",
+      "source": "DBBET Partners affiliate team (direct confirmation) + partnersdbbet.com/terms"
+    }
+  ],
+  "geo": {
+    "value": "Asia, Africa, CIS, Middle East, LatAm",
+    "notes": "Broad marketing description from DBBET's own materials; not an exhaustive or exclusive accepted-country list. Country-specific content exists for Bangladesh, Tanzania, Sri Lanka, Somalia, Uzbekistan, Azerbaijan and the wider CIS region.",
+    "data_type": "verified_first_party",
+    "last_verified": "2026-08-19",
+    "source": "DBBET Partners own marketing + published blog content"
+  },
+  "payment_frequency": {
+    "value": "Weekly ($30 minimum) or Monthly ($100 minimum)",
+    "data_type": "verified_first_party",
+    "last_verified": "2026-08-19",
+    "source": "partnersdbbet.com/terms"
+  },
+  "payment_methods": {
+    "value": ["Bank transfer", "Popular e-wallets", "Cryptocurrency (Bitcoin, USDT)"],
+    "data_type": "verified_first_party",
+    "last_verified": "2026-08-19",
+    "source": "partnersdbbet.com/terms"
+  },
+  "traffic_restrictions": {
+    "value": "Not publicly disclosed as a complete list.",
+    "notes": "DBBET's own FAQ guidance advises confirming eligibility per GEO and traffic source directly with the affiliate manager before committing a campaign.",
+    "data_type": "requires_verification",
+    "last_verified": "2026-08-19",
+    "source": "DBBET Partners FAQ content"
+  },
+  "_meta": {
+    "purpose": "Single source of truth for DBBET's own verified commercial terms, referenced by /research/igaming-affiliate-commission-benchmark/ so the page can be updated without hand-editing the HTML table in multiple places.",
+    "update_process": "Edit this file when a term changes AND re-verified, then update the corresponding row in research/igaming-affiliate-commission-benchmark/index.html to match — this site has no live templating pipeline (static HTML only), so the two are kept in sync manually, not auto-generated.",
+    "data_type_legend": {
+      "verified_first_party": "Confirmed directly by DBBET's own affiliate team or DBBET's own published terms.",
+      "verified_first_party_partial": "Some elements confirmed first-party; other elements not available as a specific published figure.",
+      "requires_verification": "Not independently confirmed as complete or current — treat as directional only."
+    }
+  }
+}
