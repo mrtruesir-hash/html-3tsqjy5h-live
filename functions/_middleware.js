@@ -25,8 +25,10 @@
 import REDIRECTS from '../redirect-map.json';
 import GONE from '../gone-urls.json';
 import VALID_SLUGS from '../valid-blog-slugs.json';
+import VALID_GUIDE_SLUGS from '../valid-guide-slugs.json';
 
 const VALID = new Set(VALID_SLUGS);
+const VALID_GUIDES = new Set(VALID_GUIDE_SLUGS);
 const goneList = (Array.isArray(GONE) ? GONE : []).filter((u) => typeof u === 'string' && u.startsWith('/'));
 // Demolished language trees — removed TOTALLY with 410 (Gone), never 301 (zero equity/connection).
 const DROPPED_LANGS = new Set(['es', 'tr', 'az', 'sw', 'so', 'fa', 'hi', 'ne']);
@@ -35,7 +37,7 @@ const DROPPED_LANGS = new Set(['es', 'tr', 'az', 'sw', 'so', 'fa', 'hi', 'ne']);
 const KEPT_LANGS = new Set(['ru', 'ar', 'fr', 'pt', 'bn', 'uz', 'si', 'ur', 'id']);
 // The site's real top-level pages (English/root only). ⚠️ Keep in sync with the repo's page dirs —
 // a real page missing here will be hard-404'd. ('blog' + blog slugs are handled separately, rule 5.)
-const PAGES = new Set(['about', 'affiliate-disclosure', 'app', 'authors', 'contact', 'cookies', 'dbbet-affiliate-program', 'editorial-policy', 'instruction', 'mob-cash', 'partner-benefits', 'privacy', 'responsible-gambling', 'terms']);
+const PAGES = new Set(['about', 'affiliate-disclosure', 'app', 'authors', 'contact', 'cookies', 'dbbet-affiliate-program', 'editorial-policy', 'guides', 'instruction', 'mob-cash', 'partner-benefits', 'privacy', 'responsible-gambling', 'terms']);
 // Pages that actually exist under a KEPT_LANGS prefix — every kept-language folder only has these
 // three built (no about/contact/cookies/privacy/terms/blog per language). Without this narrower set,
 // rule 6 below would treat e.g. /ru/privacy/ as "known" (privacy is in PAGES) even though no such
@@ -106,12 +108,20 @@ export async function onRequest(context) {
       return new Response('Not Found', { status: 404, headers: { 'content-type': 'text/plain' } });
     }
 
+    // 5b. soft-404 fix: a /guides/<slug>/ that is not a real published guide -> 404 (Part 4,
+    //     mirrors rule 5 above; English-only, no lang-prefixed /guides/ tree exists).
+    const gm = path.match(/^\/guides\/([^/]+)\/$/);
+    if (gm && !VALID_GUIDES.has(gm[1])) {
+      return new Response('Not Found', { status: 404, headers: { 'content-type': 'text/plain' } });
+    }
+
     // 6. root-level soft-404 fix: hard-404 ANY path that is not a known page.
     //    Strip an optional kept-language prefix, then require: home, /blog/* (English only — no
-    //    lang-prefixed blog exists), or a page that actually exists for that prefix (LANG_PAGES
-    //    under a language, the full PAGES set at English root). B1 fix, 2026-08-18: previously this
-    //    checked lang-prefixed paths against the full PAGES set, so e.g. /ru/privacy/ (privacy has
-    //    no /ru/ file) fell through to rule 7 and Cloudflare's static layer soft-served the homepage.
+    //    lang-prefixed blog exists), /guides/* (English only, gated by rule 5b above), or a page
+    //    that actually exists for that prefix (LANG_PAGES under a language, the full PAGES set at
+    //    English root). B1 fix, 2026-08-18: previously this checked lang-prefixed paths against the
+    //    full PAGES set, so e.g. /ru/privacy/ (privacy has no /ru/ file) fell through to rule 7 and
+    //    Cloudflare's static layer soft-served the homepage.
     {
       let seg = path.split('/').filter(Boolean); // '/' -> [], '/ru/' -> ['ru'], '/ru/instruction/' -> ['ru','instruction']
       const hasLangPrefix = seg.length > 0 && KEPT_LANGS.has(seg[0]);
@@ -119,6 +129,7 @@ export async function onRequest(context) {
       const known =
         seg.length === 0 ||                                  // home ( / or /{lang}/ )
         (!hasLangPrefix && seg[0] === 'blog') ||              // /blog/ and /blog/<slug>/ — English only
+        (!hasLangPrefix && seg[0] === 'guides') ||            // /guides/ and /guides/<slug>/ — English only
         (seg.length === 1 && (hasLangPrefix ? LANG_PAGES : PAGES).has(seg[0]));
       if (!known) {
         return new Response('Not Found', { status: 404, headers: { 'content-type': 'text/plain' } });
