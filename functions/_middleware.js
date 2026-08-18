@@ -33,9 +33,15 @@ const DROPPED_LANGS = new Set(['es', 'tr', 'az', 'sw', 'so', 'fa', 'hi', 'ne']);
 // Kept/live languages (en = root, no prefix). Used to strip a lang prefix before the known-page check.
 // bn/uz/si/ur re-added + id net-new as properly-localized (SSG-baked) languages, launched noindex until reviewed.
 const KEPT_LANGS = new Set(['ru', 'ar', 'fr', 'pt', 'bn', 'uz', 'si', 'ur', 'id']);
-// The site's real top-level pages. ⚠️ Keep in sync with the repo's page dirs — a real page missing
-// here will be hard-404'd. ('blog' + blog slugs are handled separately, rule 5.)
+// The site's real top-level pages (English/root only). ⚠️ Keep in sync with the repo's page dirs —
+// a real page missing here will be hard-404'd. ('blog' + blog slugs are handled separately, rule 5.)
 const PAGES = new Set(['about', 'affiliate-disclosure', 'app', 'contact', 'cookies', 'instruction', 'mob-cash', 'partner-benefits', 'privacy', 'terms']);
+// Pages that actually exist under a KEPT_LANGS prefix — every kept-language folder only has these
+// three built (no about/contact/cookies/privacy/terms/blog per language). Without this narrower set,
+// rule 6 below would treat e.g. /ru/privacy/ as "known" (privacy is in PAGES) even though no such
+// file exists, and Cloudflare's static-asset layer falls back to serving the homepage as a soft-200
+// duplicate instead of a 404 (SEO audit finding B1, 2026-08-18).
+const LANG_PAGES = new Set(['instruction', 'mob-cash', 'partner-benefits']);
 
 const withSlash = (p) => (p.endsWith('/') ? p : p + '/');
 // a request for a real file (has an extension): /styles.css /favicon.svg /x.webp /sitemap.xml /llms.txt /robots.txt /app.js …
@@ -93,14 +99,19 @@ export async function onRequest(context) {
     }
 
     // 6. root-level soft-404 fix: hard-404 ANY path that is not a known page.
-    //    Strip an optional kept-language prefix, then require: home, /blog/*, or a known top-level page.
+    //    Strip an optional kept-language prefix, then require: home, /blog/* (English only — no
+    //    lang-prefixed blog exists), or a page that actually exists for that prefix (LANG_PAGES
+    //    under a language, the full PAGES set at English root). B1 fix, 2026-08-18: previously this
+    //    checked lang-prefixed paths against the full PAGES set, so e.g. /ru/privacy/ (privacy has
+    //    no /ru/ file) fell through to rule 7 and Cloudflare's static layer soft-served the homepage.
     {
       let seg = path.split('/').filter(Boolean); // '/' -> [], '/ru/' -> ['ru'], '/ru/instruction/' -> ['ru','instruction']
-      if (seg.length && KEPT_LANGS.has(seg[0])) seg = seg.slice(1); // drop a kept-lang prefix
+      const hasLangPrefix = seg.length > 0 && KEPT_LANGS.has(seg[0]);
+      if (hasLangPrefix) seg = seg.slice(1); // drop a kept-lang prefix
       const known =
-        seg.length === 0 ||                       // home ( / or /{lang}/ )
-        seg[0] === 'blog' ||                      // /blog/ and /blog/<slug>/ (rule 5 already gated slugs)
-        (seg.length === 1 && PAGES.has(seg[0]));  // a known top-level page
+        seg.length === 0 ||                                  // home ( / or /{lang}/ )
+        (!hasLangPrefix && seg[0] === 'blog') ||              // /blog/ and /blog/<slug>/ — English only
+        (seg.length === 1 && (hasLangPrefix ? LANG_PAGES : PAGES).has(seg[0]));
       if (!known) {
         return new Response('Not Found', { status: 404, headers: { 'content-type': 'text/plain' } });
       }
