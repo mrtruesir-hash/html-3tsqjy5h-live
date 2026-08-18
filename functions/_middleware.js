@@ -35,7 +35,7 @@ const DROPPED_LANGS = new Set(['es', 'tr', 'az', 'sw', 'so', 'fa', 'hi', 'ne']);
 const KEPT_LANGS = new Set(['ru', 'ar', 'fr', 'pt', 'bn', 'uz', 'si', 'ur', 'id']);
 // The site's real top-level pages (English/root only). ⚠️ Keep in sync with the repo's page dirs —
 // a real page missing here will be hard-404'd. ('blog' + blog slugs are handled separately, rule 5.)
-const PAGES = new Set(['about', 'affiliate-disclosure', 'app', 'contact', 'cookies', 'instruction', 'mob-cash', 'partner-benefits', 'privacy', 'terms']);
+const PAGES = new Set(['about', 'affiliate-disclosure', 'app', 'authors', 'contact', 'cookies', 'dbbet-affiliate-program', 'editorial-policy', 'instruction', 'mob-cash', 'partner-benefits', 'privacy', 'responsible-gambling', 'terms']);
 // Pages that actually exist under a KEPT_LANGS prefix — every kept-language folder only has these
 // three built (no about/contact/cookies/privacy/terms/blog per language). Without this narrower set,
 // rule 6 below would treat e.g. /ru/privacy/ as "known" (privacy is in PAGES) even though no such
