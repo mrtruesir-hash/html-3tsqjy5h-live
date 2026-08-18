@@ -2,10 +2,10 @@
   display: none;
 }
 :root {
-  --pink: #ff2e7e;
-  --pink2: #ff5ea0;
-  --pink-deep: #d6196a;
-  --purple: #d6196a;
+  --pink: #ff345d;
+  --pink2: #ff6483;
+  --pink-deep: #db1a41;
+  --purple: #db1a41;
   --bg: #0a0a12;
   --bg2: #11111d;
   --card: #16162a;
@@ -736,7 +736,7 @@ img {
   content: '';
   position: absolute;
   inset: 0;
-  background: #ff2e7e;
+  background: var(--pink);
   mix-blend-mode: multiply;
   opacity: 0.6;
   pointer-events: none;
@@ -783,7 +783,7 @@ img {
   content: '';
   position: absolute;
   inset: 0;
-  background: #ff2e7e;
+  background: var(--pink);
   mix-blend-mode: multiply;
   opacity: 0.2;
   pointer-events: none;
@@ -822,7 +822,7 @@ img {
   content: '';
   position: absolute;
   inset: 0;
-  background: #ff2e7e;
+  background: var(--pink);
   mix-blend-mode: multiply;
   opacity: 0.2;
   pointer-events: none;
@@ -861,7 +861,7 @@ img {
   content: '';
   position: absolute;
   inset: 0;
-  background: #ff2e7e;
+  background: var(--pink);
   mix-blend-mode: multiply;
   opacity: 0.2;
   pointer-events: none;
@@ -899,7 +899,7 @@ img {
   content: '';
   position: absolute;
   inset: 0;
-  background: #ff2e7e;
+  background: var(--pink);
   mix-blend-mode: multiply;
   opacity: 0.2;
   pointer-events: none;
